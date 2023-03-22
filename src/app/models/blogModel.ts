@@ -27,14 +27,12 @@ const blogSchema = new Schema({
         required: true
     },
     Author: {
-        user: {
-            type: Schema.Types.ObjectId,
-            required: true,
-            ref: 'User'
-        }
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
     }
 }, {
     timestamps: true
 })
 
-module.exports = model('Blog', blogSchema)
+export default model('Blog', blogSchema)

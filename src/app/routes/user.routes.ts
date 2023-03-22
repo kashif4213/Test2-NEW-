@@ -1,4 +1,4 @@
-const express = require('express')
+import express from 'express'
 import AuthController from "../controllers/auth.controller"
 import isAuthenticated from '../middleware/auth.middleware'
 const router = express.Router()
