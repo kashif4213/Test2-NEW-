@@ -1,14 +1,13 @@
 import express from 'express'
-const { createModel, getModels, updateModel, deleteModel, BlogParamHandler } = require('../controllers/blogController')
-const { addBlogMiddleware, blogMiddlewareUpdateDelete } = require('../middleware/blogMiddleware')
-let userMiddleware = require('../middleware/userMiddleware')
+import BlogController from '../controllers/blog.controller'
+import isAuthenticated from '../middleware/auth.middleware'
 let blogRouter = express.Router()
 const { myAsyncHandler } = require('../utils/asyncHandler')
 
 
 
-blogRouter.route('/').get(userMiddleware.verifyToken, getModels).post(userMiddleware.verifyToken, addBlogMiddleware, createModel)
-blogRouter.route('/:id').put(userMiddleware.verifyToken, blogMiddlewareUpdateDelete, updateModel).delete(userMiddleware.verifyToken, blogMiddlewareUpdateDelete, deleteModel)
+blogRouter.route('/').get(myAsyncHandler(isAuthenticated), myAsyncHandler(BlogController.getBlogs)).post(myAsyncHandler(isAuthenticated),  myAsyncHandler(BlogController.createBlog))
+blogRouter.route('/:id').put(myAsyncHandler(isAuthenticated),  myAsyncHandler(BlogController.updateBlog)).delete(myAsyncHandler(isAuthenticated) ,  myAsyncHandler(BlogController.deleteBlog))
 
 
 module.exports = blogRouter

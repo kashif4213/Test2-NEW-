@@ -1,8 +1,7 @@
-import { Request, Response, NextFunction, RequestHandler } from "express";
-import { createblogDTO } from "../dtos/blog.dto";
-import BlogService from "../services/blog.service";
-const { myAsyncHandler } = require('../../../asyncHandler');
-import Blog from '../models/blogModel';
+import { Request, Response } from "express"
+import { createblogDTO, updateblogDTO } from "../dtos/blog.dto"
+import BlogService from "../services/blog.service"
+import Blog from '../models/blogModel'
 
 
 export default class BlogController{
@@ -20,18 +19,31 @@ export default class BlogController{
         let blog = BlogService.createBlog(blogData)
         return res.json({
             success: true,
-            message: 'Blogs Fetched Successfully',
+            message: 'Blog Created Successfully',
             data : blog,
         })
     }
 
     static async updateBlog(req : Request , res : Response) : Promise <Response>{
-        return res.json({
+        let blogData : updateblogDTO = req.body
+        let blog = BlogService.updateBlog(blogData,req.params.id)
 
+        return res.json({
+            success: true,
+            message: 'Blogs Updated Successfully',
+            data : blog,
         })
     }
 
     static async deleteBlog(req : Request , res : Response) : Promise<Response>{
+        let blogData : updateblogDTO = req.body
+        let blog = BlogService.updateBlog(blogData,req.params.id)
+
+        return res.json({
+            success: true,
+            message: 'Blogs Deleted Successfully',
+            data : blog,
+        })
         return res.json({
             
         })
@@ -39,26 +51,26 @@ export default class BlogController{
 
 }
 
-const getModels: RequestHandler = myAsyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    let blogs = await Blog.find().skip(req.body.pageNumber * 5 ).limit(5).sort({title : 1})
-    return res.status(200).json(blogs)
-})
+// const getModels: RequestHandler = myAsyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+//     let blogs = await Blog.find().skip(req.body.pageNumber * 5 ).limit(5).sort({title : 1})
+//     return res.status(200).json(blogs)
+// })
 
 
-const createModel: RequestHandler = myAsyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    let tempBlog = await Blog.create(req.body.blog)
-    return res.status(201).json(tempBlog)
-})
+// const createModel: RequestHandler = myAsyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+//     let tempBlog = await Blog.create(req.body.blog)
+//     return res.status(201).json(tempBlog)
+// })
 
 
-const updateModel: RequestHandler = myAsyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    await req.body.blog.save()
-    return res.status(200).json(req.body.blog)
-})
+// const updateModel: RequestHandler = myAsyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+//     await req.body.blog.save()
+//     return res.status(200).json(req.body.blog)
+// })
 
-const deleteModel: RequestHandler = myAsyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    await req.body.blog.remove()
-    return res.status(200).json(req.params.id)
-})
+// const deleteModel: RequestHandler = myAsyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+//     await req.body.blog.remove()
+//     return res.status(200).json(req.params.id)
+// })
 
 

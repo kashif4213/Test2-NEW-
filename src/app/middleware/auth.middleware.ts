@@ -8,11 +8,14 @@ const isAuthenticated= (req: IGetUserAuthInfoRequest, res: Response, next: NextF
     const decoded = verify(req.cookies.token.toString(), "mySceretKey")
     if(decoded){
         req.user = decoded
-        console.log(decoded)
-         next()
+        console.log('decoded : ',decoded)
+        next()
     }
+  } 
+  else{
+    throw new Error("401")
   }
-  throw new Error("401")
+  
 }
 
 export default isAuthenticated;

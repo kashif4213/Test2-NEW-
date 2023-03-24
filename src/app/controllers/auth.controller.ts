@@ -1,15 +1,14 @@
-import { Request, RequestHandler, Response } from 'express';
+import { Request, Response } from 'express';
 import { LoginDTO, signupDTO } from '../dtos/auth.dto';
 import AuthService from '../services/auth.service'
 
-
-//const authService = new AuthService();
 
 export default class AuthController {
 
     // Register a new User
     static async registerUser(req: Request, res: Response): Promise<Response> {
         const authData: signupDTO = req.body
+        //console.log(authData)
         const userCreated = await AuthService.signup(authData)
 
 
