@@ -35,8 +35,6 @@ export class createblogDTO{
         }
 }
 
-
-
 export class updateblogDTO{
     @IsString()
     @MinLength(4)
@@ -76,3 +74,5 @@ export class updateblogDTO{
             this.Author = Author
         }
 }
+
+

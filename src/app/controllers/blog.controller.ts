@@ -1,12 +1,12 @@
 import { Request, Response } from "express"
 import { createblogDTO, updateblogDTO } from "../dtos/blog.dto"
 import BlogService from "../services/blog.service"
-import Blog from '../models/blogModel'
 
 
 export default class BlogController{
     static async getBlogs(req : Request , res : Response) : Promise<Response>{
-        let blogs = await Blog.find().skip(req.body.pageNumber * 5 ).limit(5).sort({title : 1})
+        //let blogs = await Blog.find().skip(req.body.pageNumber * 5 ).limit(5).sort({title : 1})
+        let blogs = await BlogService.getBlogs(req.body.pageNumber)
         return res.json({
             success: true,
             message: 'Blogs Fetched Successfully',
