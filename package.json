@@ -25,6 +25,7 @@
     "node-cache": "^5.1.2",
     "nodemon": "^2.0.21",
     "promisify": "^0.0.3",
+    "socket.io": "^4.6.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.2"
   },
