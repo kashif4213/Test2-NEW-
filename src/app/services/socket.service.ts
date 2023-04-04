@@ -14,42 +14,42 @@ export class SocketService {
 
     io.on("connection", (socket: Socket) => {
       console.log('new connect')
-  socket.on("new-user", async (name : any) => {
-    // const members = await User.find();
-    // console.log(name+" entered",members );
-    
-    io.emit("new-user");
-  });
+      socket.on("new-user", async (name: any) => {
+        // const members = await User.find();
+        // console.log(name+" entered",members );
 
-  socket.on("join-room", async (newRoom, previousRoom) => {
-    socket.join(newRoom);
-    socket.leave(previousRoom);
-    let roomMessages = await this.getLastMessagesFromRoom(newRoom)
-    console.log('joined the ',newRoom);
-    socket.emit("room-messages", roomMessages);
-  });
+        io.emit("new-user");
+      });
 
-  socket.on("message-room", async (room, content, sender) => {
+      socket.on("join-room", async (newRoom, previousRoom) => {
+        socket.join(newRoom);
+        socket.leave(previousRoom);
+        let roomMessages = await this.getLastMessagesFromRoom(newRoom)
+        console.log('joined the ', newRoom);
+        socket.emit("room-messages", roomMessages);
+      });
 
-    const newMessage = await Message.create({
-      content,
-      from: sender,
-      to: room,
+      socket.on("message-room", async (room, content, sender) => {
+
+        const newMessage = await Message.create({
+          content,
+          from: sender,
+          to: room,
+        });
+        console.log('new Notification', newMessage)
+        let roomMessages = await this.getLastMessagesFromRoom(room);
+        // sending message to room
+        io.to(room).emit("room-messages", roomMessages);
+        socket.broadcast.emit("notifications", room);
+      });
+
     });
-    console.log('new Notification',newMessage)
-    let roomMessages = await this.getLastMessagesFromRoom(room);
-    // sending message to room
-    io.to(room).emit("room-messages", roomMessages);
-    socket.broadcast.emit("notifications", room);
-  });
-
-});
   }
   private async getLastMessagesFromRoom(room: string) {
-  let roomMessages = await Message.aggregate([
-    { $match: { to: room } },
-    { $group: { _id: "$date", messagesByDate: { $push: "$$ROOT" } } },
-  ]);
-  return roomMessages;
-}
+    let roomMessages = await Message.aggregate([
+      { $match: { to: room } },
+      { $group: { _id: "$date", messagesByDate: { $push: "$$ROOT" } } },
+    ]);
+    return roomMessages;
+  }
 }

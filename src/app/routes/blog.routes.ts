@@ -9,8 +9,8 @@ const { myAsyncHandler } = require('../utils/asyncHandler')
 
 
 
-blogRouter.route('/').get(myAsyncHandler(isAuthenticated), myAsyncHandler(cachedBlogs) ,myAsyncHandler(BlogController.getBlogs)).post(myAsyncHandler(isAuthenticated), myAsyncHandler(dtoValidationMiddleware(createblogDTO)) ,myAsyncHandler(BlogController.createBlog))
-blogRouter.route('/:id').put(myAsyncHandler(isAuthenticated), myAsyncHandler(dtoValidationMiddleware(updateblogDTO)) ,myAsyncHandler(BlogController.updateBlog)).delete(myAsyncHandler(isAuthenticated) ,  myAsyncHandler(BlogController.deleteBlog))
+blogRouter.route('/').get(myAsyncHandler(isAuthenticated), myAsyncHandler(cachedBlogs), myAsyncHandler(BlogController.getBlogs)).post(myAsyncHandler(isAuthenticated), myAsyncHandler(dtoValidationMiddleware(createblogDTO)), myAsyncHandler(BlogController.createBlog))
+blogRouter.route('/:id').put(myAsyncHandler(isAuthenticated), myAsyncHandler(dtoValidationMiddleware(updateblogDTO)), myAsyncHandler(BlogController.updateBlog)).delete(myAsyncHandler(isAuthenticated), myAsyncHandler(BlogController.deleteBlog))
 
 
 module.exports = blogRouter

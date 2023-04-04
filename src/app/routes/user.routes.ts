@@ -8,8 +8,8 @@ const { myAsyncHandler } = require('../utils/asyncHandler')
 
 
 userRouter.route('/register').post(myAsyncHandler(dtoValidationMiddleware(signupDTO)), myAsyncHandler(AuthController.registerUser))
-userRouter.route('/login').post( myAsyncHandler(dtoValidationMiddleware(LoginDTO)) ,myAsyncHandler(AuthController.login))
-userRouter.route('/resetPassword').post(myAsyncHandler(dtoValidationMiddleware(signupDTO)) ,myAsyncHandler(AuthController.resetPassword))
-userRouter.route('/logout').post( myAsyncHandler(isAuthenticated), myAsyncHandler(AuthController.logOutUser))
+userRouter.route('/login').post(myAsyncHandler(dtoValidationMiddleware(LoginDTO)), myAsyncHandler(AuthController.login))
+userRouter.route('/resetPassword').post(myAsyncHandler(dtoValidationMiddleware(signupDTO)), myAsyncHandler(AuthController.resetPassword))
+userRouter.route('/logout').post(myAsyncHandler(isAuthenticated), myAsyncHandler(AuthController.logOutUser))
 
 module.exports = userRouter;

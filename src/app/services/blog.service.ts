@@ -5,10 +5,10 @@ import Blog from '../models/blogModel';
 
 export default class BlogService {
 
-    static async getBlogs( pageNumber: number) {
+    static async getBlogs(pageNumber: number) {
         let blogs = await Blog.find().skip(pageNumber * 5).limit(5).sort({ title: 1 })
         if (blogs) {
-          //  console.log('this is req.query : ', reqQuery)
+            //  console.log('this is req.query : ', reqQuery)
             myCache.set("blogs", blogs)
             return blogs
         }

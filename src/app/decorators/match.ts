@@ -3,8 +3,8 @@ import { ValidationArguments, ValidatorConstraint, ValidatorConstraintInterface 
 @ValidatorConstraint({ name: 'CustomMatchPasswords', async: false })
 export class CustomMatchPasswords implements ValidatorConstraintInterface {
    validate(password: string, args: ValidationArguments) {
-    console.log(args);
-    
+      console.log(args);
+
 
       if (password !== (args.object as any)[args.constraints[0]]) return false;
       return true;

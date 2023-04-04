@@ -3,49 +3,46 @@ import { createblogDTO, updateblogDTO } from "../dtos/blog.dto"
 import BlogService from "../services/blog.service"
 
 
-export default class BlogController{
-    static async getBlogs(req : Request , res : Response) : Promise<Response>{
+export default class BlogController {
+    static async getBlogs(req: Request, res: Response): Promise<Response> {
         //let blogs = await Blog.find().skip(req.body.pageNumber * 5 ).limit(5).sort({title : 1})
         let blogs = await BlogService.getBlogs(req.body.pageNumber)
-        return res.json({
+        return res.status(200).json({
             success: true,
             message: 'Blogs Fetched Successfully',
-            data : blogs,
+            data: blogs,
         })
     }
 
-    static async createBlog(req: Request , res : Response) : Promise<Response>{
-        let blogData : createblogDTO = req.body
+    static async createBlog(req: Request, res: Response): Promise<Response> {
+        let blogData: createblogDTO = req.body
         let blog = BlogService.createBlog(blogData)
-        return res.json({
+        return res.status(201).json({
             success: true,
             message: 'Blog Created Successfully',
-            data : blog,
+            data: blog,
         })
     }
 
-    static async updateBlog(req : Request , res : Response) : Promise <Response>{
-        let blogData : updateblogDTO = req.body
-        let blog = BlogService.updateBlog(blogData,req.params.id)
+    static async updateBlog(req: Request, res: Response): Promise<Response> {
+        let blogData: updateblogDTO = req.body
+        let blog = BlogService.updateBlog(blogData, req.params.id)
 
-        return res.json({
+        return res.status(200).json({
             success: true,
             message: 'Blogs Updated Successfully',
-            data : blog,
+            data: blog,
         })
     }
 
-    static async deleteBlog(req : Request , res : Response) : Promise<Response>{
-        let blogData : updateblogDTO = req.body
-        let blog = BlogService.updateBlog(blogData,req.params.id)
+    static async deleteBlog(req: Request, res: Response): Promise<Response> {
+        let blogData: updateblogDTO = req.body
+        let blog = BlogService.updateBlog(blogData, req.params.id)
 
-        return res.json({
+        return res.status(200).json({
             success: true,
             message: 'Blogs Deleted Successfully',
-            data : blog,
-        })
-        return res.json({
-            
+            data: blog,
         })
     }
 

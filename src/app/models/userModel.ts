@@ -33,4 +33,4 @@ userSchema.pre('save', async function (next) {
     }
 })
 
-export  default model('User', userSchema)
+export default model('User', userSchema)

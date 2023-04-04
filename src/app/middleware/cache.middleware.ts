@@ -8,7 +8,7 @@ const cachedBlogs = (
 ) => {
     let blogs: any = []
     //console.log('this is the req Object : ',req.baseUrl);
-    
+
     if (req.baseUrl.includes('blog')) {
         blogs = myCache.get("blogs")
     }

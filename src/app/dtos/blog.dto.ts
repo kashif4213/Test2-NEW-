@@ -1,78 +1,78 @@
-import {  IsString, MinLength, MaxLength, Matches, IsNotEmpty, IsOptional } from "class-validator"
+import { IsString, MinLength, MaxLength, Matches, IsNotEmpty, IsOptional } from "class-validator"
 
-export class createblogDTO{
+export class createblogDTO {
     @IsString()
     @MinLength(4)
     @MaxLength(20)
-    title : string
+    title: string
 
     @IsString()
     @MinLength(4)
     @MaxLength(20)
-    description : string
+    description: string
 
     @IsNotEmpty()
-    nLikes : number
+    nLikes: number
 
     @IsNotEmpty()
-    numComments : number
- 
+    numComments: number
+
     @IsNotEmpty()
-    Author  : string
+    Author: string
 
 
-    constructor(title : string,
-        description : string,
-        nLikes : number,
-        numComments : number,
-        Author : string  ){
+    constructor(title: string,
+        description: string,
+        nLikes: number,
+        numComments: number,
+        Author: string) {
 
-            this.title = title
-            this.description= description
-            this.nLikes = nLikes
-            this.numComments = numComments
-            this.Author = Author
-        }
+        this.title = title
+        this.description = description
+        this.nLikes = nLikes
+        this.numComments = numComments
+        this.Author = Author
+    }
 }
 
-export class updateblogDTO{
+export class updateblogDTO {
     @IsString()
     @MinLength(4)
     @MaxLength(20)
     @IsOptional()
-    title : string
+    title: string
 
     @IsString()
     @MinLength(4)
     @MaxLength(20)
     @IsOptional()
-    description : string
+    description: string
 
     @IsNotEmpty()
     @IsOptional()
-    nLikes : number
+    nLikes: number
 
     @IsNotEmpty()
     @IsOptional()
-    numComments : number
- 
+    numComments: number
+
     @IsNotEmpty()
     @IsOptional()
-    Author  : string
+    Author: string
 
 
-    constructor(title : string,
-        description : string,
-        nLikes : number,
-        numComments : number,
-        Author : string  ){
+    constructor(title: string,
+        description: string,
+        nLikes: number,
+        numComments: number,
+        Author: string) {
 
-            this.title = title
-            this.description= description
-            this.nLikes = nLikes
-            this.numComments = numComments
-            this.Author = Author
-        }
+        this.title = title
+        this.description = description
+        this.nLikes = nLikes
+        this.numComments = numComments
+        this.Author = Author
+    }
 }
 
 
